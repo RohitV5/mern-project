@@ -39,3 +39,12 @@ jspm_packages
 
 #Excluding build directory
 public/
+
+
+# misc
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

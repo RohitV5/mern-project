@@ -1,0 +1,1 @@
+dotennv - for environment variables //add .env file to gitignore
