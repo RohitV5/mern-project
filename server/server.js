@@ -4,7 +4,11 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv').config()
 
-app.use(bodyParser.json())
+
+
+// routers
+const users = require('./routes/api/users')
+
 
 
 
@@ -20,6 +24,10 @@ mongoose.connect(mongoUri,{
     useCreateIndex: true,
     useFindAndModify: false
 })
+
+app.use(bodyParser.json());
+app.use("/api/users",users);
+
 
 
 const port = process.env.PORT || 3001;

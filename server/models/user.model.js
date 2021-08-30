@@ -52,6 +52,30 @@ const userSchema = mongoose.Schema({
     //collections:"player"  //in case we want to overrride default collection name
 })
 
+
+// middleware to encrypt the password before saving user
+//there are also other middlewares as per requirements
+userSchema.pre('save',async function(next){
+    let user = this;
+    if(user.isModified('password')){
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(user.password,salt);
+        user.password = hash;
+    }
+    next()
+})
+
+// check if email already taken
+userSchema.statics.emailTaken = async function(email){
+    //this refers to the email being saved
+    const user = await this.findOne({email});
+    return !!user;
+    //returning boolean
+
+}
+
 const User = mongoose.model('User', userSchema)
 
 module.exports = {User}
+
+//learn about statics and pre's in mongoose
