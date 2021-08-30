@@ -1,0 +1,4 @@
+//rename this file to .env and add these variables for this project to work
+DB_HOST=clusterurl
+DB_USER=username
+DB_PASSWORD=password
