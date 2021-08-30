@@ -106,6 +106,33 @@ router.route("/profile")
     }
 })
 
+router.route('/update_email').patch(checkLoggedIn,grantAccess('updateOwn','profile'), async(req,res)=>{
+    try{
+        if(await User.emailTaken(req.body.newemail)){
+            return res.status(400).json({message:"Sorry email taken"})
+        }
+
+        const user = await User.findOneAndUpdate({_id:req.user._id},
+            {
+                "$set":{
+                    email: req.body.newemail,
+                }
+            },
+            {new: true}
+        );
+        if(!user) return res.status(400).json({message:'User not found'});
+
+        const token = user.generateToken();
+
+        res.cookie('x-access-token',token).status(200).json({email:user.email})
+
+
+    }catch(error){
+        res.status(400).json({message:"Error occured updating",error:error})
+    }
+})
+
+
 
 
 router.route('/isauth').get(checkLoggedIn, async(req,res)=>{
