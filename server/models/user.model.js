@@ -74,6 +74,13 @@ userSchema.statics.emailTaken = async function(email){
 
 }
 
+userSchema.methods.generateToken = function(){
+    let user = this;
+    const userObj = {_id:user._id.toHexString(),email:user.email}
+    const token = jwt.sign(userObj,process.env.DB_SECRET,{expiresIn:'1d'})
+    return token;
+}
+
 const User = mongoose.model('User', userSchema)
 
 module.exports = {User}

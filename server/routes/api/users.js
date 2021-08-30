@@ -22,16 +22,16 @@ router.route("/register")
         password: req.body.password
     })
 
-    console.log(user)
-
     //generate the token
     const doc = await user.save();
  
     //send email
     
     //save and send token with cookie 
-    res.cookie('x-access-token','fjghfgikjh').status(200).send(doc);
+    const token = user.generateToken();
 
+    res.cookie('x-access-token',token).status(200).send(getUserProps(doc));
+ 
     }catch(error){
         res.status(400).json({message:"Error",error:error})
     }
@@ -39,5 +39,22 @@ router.route("/register")
 
 })
 
+
+// router.route("/profile")
+// .get(checkLoggedIn, grantAccess(), async (req,res)=>{
+
+// })
+
+//helper function because we dont want to send password back to front end
+const getUserProps = (user) =>{
+    return{
+        _id:user._id,
+        email:user.email,
+        firstname:user.firstname,
+        lastname:user.lastname,
+        age:user.age,
+        role:user.role
+    }
+}
 
 module.exports = router;
