@@ -13,3 +13,5 @@ Note: Never save .env to github as it contains all your credentials. Add this to
 # use pre's and statics in mongoose models.
 
 # use npm accesscontrol for role management.
+this is an amazing package wqill allows access control for different operations and allow restricted access to data based on roles.
+So for different types of user we can see different type of data.

@@ -72,7 +72,7 @@ router.route("/profile")
         const permission = res.locals.permission;
 
         //find user
-        let user = await User.findById(req.user._id);
+        const user = await User.findById(req.user._id);
         if(!user) return res.status(400).json({message: "Username not found"})
 
         //permission.filter is a method in acesscontrol
@@ -82,6 +82,34 @@ router.route("/profile")
     }
 
 
+})
+.patch(checkLoggedIn,grantAccess('updateOwn','profile'),async(req,res)=>{
+
+    try{
+        //find user
+        const user = await User.findOneAndUpdate({_id:req.user._id},
+            {
+                "$set":{
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    age: req.body.age,
+                }
+            },
+            {new: true}
+        );
+        if(!user) return res.status(400).json({message:'User not found'});
+
+        res.status(200).json(getUserProps(user))
+        
+    }catch(error){
+        res.status(400).json({message:"Error occured updating",error:error})
+    }
+})
+
+
+
+router.route('/isauth').get(checkLoggedIn, async(req,res)=>{
+    res.status(200).send(getUserProps(req.user))
 })
 
 
