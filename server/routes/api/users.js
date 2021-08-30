@@ -40,6 +40,29 @@ router.route("/register")
 })
 
 
+router.route("/signin")
+    .post( async(req,res)=>{
+        try{
+
+            //find user
+            let user = await User.findOne({email:req.body.email});
+            if(!user) return res.status(400).json({message: "Username or password is incorrect"})
+
+            //compare password
+            const compare = await user.comparePassword(req.body.password)
+            if(!compare) return res.status(400).json({message: "Username or password is incorrect"})
+
+            //generate token
+            //save and send token with cookie 
+            const token = user.generateToken();
+            res.cookie('x-access-token',token).status(200).send(getUserProps(user));
+
+
+        }catch(error){
+            res.status(400).json({message:"Error",error:error})
+        }
+    })
+
 // router.route("/profile")
 // .get(checkLoggedIn, grantAccess(), async (req,res)=>{
 
@@ -47,6 +70,7 @@ router.route("/register")
 
 //helper function because we dont want to send password back to front end
 const getUserProps = (user) =>{
+
     return{
         _id:user._id,
         email:user.email,
