@@ -5,6 +5,8 @@ require('dotenv').config();
 
 
 const {User} = require('../../models/user.model');
+const {checkLoggedIn} = require('../../middlewares/auth');
+const { grantAccess } = require('../../middlewares/roles');
 
 
 router.route("/register")
@@ -63,10 +65,25 @@ router.route("/signin")
         }
     })
 
-// router.route("/profile")
-// .get(checkLoggedIn, grantAccess(), async (req,res)=>{
+router.route("/profile")
+.get(checkLoggedIn,grantAccess('readOwn','profile'),async(req,res)=>{
 
-// })
+    try{
+        const permission = res.locals.permission;
+
+        //find user
+        let user = await User.findById(req.user._id);
+        if(!user) return res.status(400).json({message: "Username not found"})
+
+        //permission.filter is a method in acesscontrol
+        res.status(200).send(permission.filter(user._doc));
+    }catch(error){
+        res.status(400).json({message:"Error",error:error})
+    }
+
+
+})
+
 
 //helper function because we dont want to send password back to front end
 const getUserProps = (user) =>{
