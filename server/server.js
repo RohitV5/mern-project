@@ -9,13 +9,14 @@ require('dotenv').config()
 
 // routers
 const users = require('./routes/api/users')
+const articles = require('./routes/api/articles')
 
 
 
 
 
 let mongoUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:?retryWrites=true&w=majority`
-mongoUri = "mongodb://127.0.0.1:27017/flickbase"
+// mongoUri = "mongodb://127.0.0.1:27017/flickbase"
 
 
 
@@ -35,6 +36,7 @@ mongoose.connect(mongoUri,{
 app.use(bodyParser.json());
 app.use(checkToken);
 app.use("/api/users",users);
+app.use("/api/articles",articles);
 
 
 
