@@ -77,10 +77,15 @@ router.route("/admin/paginate")
 .post(checkLoggedIn,grantAccess('readAny','articles'),async(req,res)=>{
     try{
 
-        console.log(req.body)
+        
+
         
         const limit = req.body.limit ? req.body.limit : 5;
-        const aggQuery = Article.aggregate();
+
+        //aggregate uses pipelines
+        const aggQuery = Article.aggregate([
+            {$match :  {"status":"public"}}
+        ])
         
 
         const options = {
