@@ -15,6 +15,9 @@ let grantsObject = {
             'read:any': ['*'],
             'update:any': ['*'],
             'delete:any': ['*']
+        },
+        articles:{
+            'read:any': ['*'],
         }
     },
     user:{

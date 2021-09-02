@@ -8,6 +8,7 @@ const {Article} = require('../../models/article.model');
 const {checkLoggedIn} = require('../../middlewares/auth');
 const { grantAccess } = require('../../middlewares/roles');
 const { request } = require('express');
+const { sortArgsHelper } = require('../../config/helper');
 
 router.route('/admin/add_articles')
 .post(checkLoggedIn,grantAccess('createAny','article'),async(req,res)=>{
@@ -71,6 +72,43 @@ router.route('/admin/:id')
         res.status(400).json({message:"Error deleting article",error:error})
     }
 })
+
+router.route("/loadmore")
+.post(async(req,res)=>{
+    try{
+        let sortArgs = sortArgsHelper(req.body);
+
+
+        res.status(200).json(articles)
+    }catch(e){
+        res.status(400).json({message:"Error fetching article",error:error})
+    }
+
+})
+
+//NO AUTH REQUIRED//
+
+router.route("/loadmore")
+.post(async(req,res)=>{
+    try{
+        let sortArgs = sortArgsHelper(req.body);
+
+        console.log(sortArgs)
+
+        const articles = await Article
+        .find({status: 'public'})
+        .sort([[sortArgs.sortBy,sortArgs.order]])
+        .skip(sortArgs.skip)
+        .limit(sortArgs.limit)
+
+        res.status(200).json(articles)
+    }catch(e){
+        res.status(400).json({message:"Error fetching article",error:error})
+    }
+
+})
+
+
 
 
 
