@@ -36,7 +36,7 @@ router.route('/admin/:id')
         }
         res.status(200).json(article)
     }catch(error){
-        res.status(400).json({message:"Error fetching article",error:error})
+        res.status(400).json({message:"Error fetching article using id",error:error})
     }
 })
 .patch(checkLoggedIn,grantAccess('readAny','article'),async(req,res)=>{
@@ -73,15 +73,31 @@ router.route('/admin/:id')
     }
 })
 
-router.route("/loadmore")
-.post(async(req,res)=>{
+router.route("/admin/paginate")
+.post(checkLoggedIn,grantAccess('readAny','articles'),async(req,res)=>{
     try{
-        let sortArgs = sortArgsHelper(req.body);
+
+        console.log(req.body)
+        
+        const limit = req.body.limit ? req.body.limit : 5;
+        const aggQuery = Article.aggregate();
+        
+
+        const options = {
+            page: req.body.page,
+            limit,
+            sort:{_id:'desc'}
+        }
+
+        console.log(aggQuery)
+
+
+        const articles = await Article.aggregatePaginate(aggQuery,options);
 
 
         res.status(200).json(articles)
-    }catch(e){
-        res.status(400).json({message:"Error fetching article",error:error})
+    }catch(error){
+        res.status(400).json({message:"Error fetching article using paginate",error:error})
     }
 
 })
@@ -90,6 +106,8 @@ router.route("/loadmore")
 
 router.route("/loadmore")
 .post(async(req,res)=>{
+
+    console.log(req)
     try{
         let sortArgs = sortArgsHelper(req.body);
 
@@ -102,8 +120,8 @@ router.route("/loadmore")
         .limit(sortArgs.limit)
 
         res.status(200).json(articles)
-    }catch(e){
-        res.status(400).json({message:"Error fetching article",error:error})
+    }catch(error){
+        res.status(400).json({message:"Error fetching article using loadmore",error:error})
     }
 
 })
