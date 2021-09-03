@@ -1,4 +1,4 @@
-import { GET_ARTICLES } from "../types"
+import { GET_ARTICLES} from "../types"
 
 export default function articleReducer(state={}, action){
     switch(action.type){

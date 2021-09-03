@@ -1,4 +1,4 @@
-import * as articles from './index';
+import * as index_actions from './index';
 import axios from 'axios';
 
 // axios.defaults.headers.post['Content-type'] = 'application/json'
@@ -19,10 +19,12 @@ export const getArticles = (sort) => {
                 newArts = [...prevArts,...arts.data]
             }            
 
-            //dispatching to reducer
-            dispatch(articles.getArticles(newArts));
+            //dispatching to list of actions in actions/index.js file 
+            dispatch(index_actions.getArticles(newArts));
+            dispatch(index_actions.successGlobal('Articles loaded'))
         }catch(error){
-
+            //dispatching to list of actions in actions/index.js file to show a notification
+            dispatch(index_actions.errorGlobal('Oops error loading articles'))
         }
     }
 }
