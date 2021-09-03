@@ -33,7 +33,7 @@ mongoose.connect(mongoUri,{
     console.log(e)
 })
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(checkToken);
 app.use("/api/users",users);
 app.use("/api/articles",articles);

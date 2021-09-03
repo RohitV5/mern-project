@@ -80,6 +80,8 @@ router.route("/admin/paginate")
         
 
         
+
+        
         const limit = req.body.limit ? req.body.limit : 5;
 
         //aggregate uses pipelines
@@ -94,7 +96,6 @@ router.route("/admin/paginate")
             sort:{_id:'desc'}
         }
 
-        console.log(aggQuery)
 
 
         const articles = await Article.aggregatePaginate(aggQuery,options);
@@ -112,11 +113,11 @@ router.route("/admin/paginate")
 router.route("/loadmore")
 .post(async(req,res)=>{
 
-    console.log(req)
+ 
     try{
         let sortArgs = sortArgsHelper(req.body);
 
-        console.log(sortArgs)
+        console.log(req.body)
 
         const articles = await Article
         .find({status: 'public'})

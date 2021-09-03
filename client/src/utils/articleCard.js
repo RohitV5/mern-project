@@ -19,10 +19,10 @@ const ArticleCard = ({article}) =>{
             </CardMedia>
             <CardContent>
                 <Typography variant="h5"> 
-                    Some Titile
+                    {article.title}
                 </Typography>
                 <Typography variant="body2" component="p"> 
-                    Some title
+                    {article.excerpt}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -31,7 +31,7 @@ const ArticleCard = ({article}) =>{
                         
                     </FavoriteIcon>
                 </IconButton>
-                <Button size="small" color="primary" component={RouterLink} to={`/article/id`}>
+                <Button size="small" color="primary" component={RouterLink} to={`/article/${article._id}`}>
                     View Article
                 </Button>
             </CardActions>
