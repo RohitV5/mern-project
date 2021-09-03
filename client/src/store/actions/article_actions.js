@@ -5,7 +5,9 @@ import axios from 'axios';
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 export const getArticles = (sort) => {
+
     return async (dispatch, getState) => {
+
         try{
             const arts = await axios.post('/api/articles/loadmore',sort)
 
@@ -21,7 +23,13 @@ export const getArticles = (sort) => {
 
             //dispatching to list of actions in actions/index.js file 
             dispatch(index_actions.getArticles(newArts));
-            dispatch(index_actions.successGlobal('Articles loaded'))
+            
+            if(arts.data && arts.data.length === 0){
+                dispatch(index_actions.errorGlobal('No more articles available to load'));
+            }else{
+                dispatch(index_actions.successGlobal('Articles loaded'))
+            }
+            
         }catch(error){
             //dispatching to list of actions in actions/index.js file to show a notification
             dispatch(index_actions.errorGlobal('Oops error loading articles'))
