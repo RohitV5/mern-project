@@ -3,15 +3,20 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import GoogleFontLoader from 'react-google-font-loader';
 import Home from './components/home';
 import Header from './components/navigation/header';
+import MainLayout from './components/hoc/mainLayout';
 
 const Routes = () => {
 
     return (
         <BrowserRouter>
             <Header/>
-            <Switch>
-                <Route path="/" component={Home}/>
-            </Switch>
+            //MainLayout is a hoc component, that is it will render things iside it as they are
+            <MainLayout> 
+                <Switch>
+
+                    <Route path="/" component={Home}/>
+                </Switch>
+            </MainLayout>
             <GoogleFontLoader
                 fonts={[
                     {
