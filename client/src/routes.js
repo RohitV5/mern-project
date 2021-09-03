@@ -10,7 +10,7 @@ const Routes = () => {
     return (
         <BrowserRouter>
             <Header/>
-            //MainLayout is a hoc component, that is it will render things iside it as they are
+            {/* MainLayout is a hoc component, that is it will render things iside it as they are */}
             <MainLayout> 
                 <Switch>
 

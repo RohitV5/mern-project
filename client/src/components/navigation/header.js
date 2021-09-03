@@ -3,12 +3,7 @@ import {Link, withRouter} from 'react-router-dom';
 import SideDrawer from './sideNavigation';
 
 
-const Header = (prop) =>{
-
-
-        console.log(prop)
-
-    
+const Header = (prop) =>{    
 
     return(
         <>

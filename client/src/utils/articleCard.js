@@ -21,7 +21,7 @@ const ArticleCard = ({article}) =>{
                 <Typography variant="h5"> 
                     Some Titile
                 </Typography>
-                <Typography variant="body1" component="p"> 
+                <Typography variant="body2" component="p"> 
                     Some title
                 </Typography>
             </CardContent>
