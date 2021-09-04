@@ -1,12 +1,23 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 
 import {TextField, Button, Divider} from '@material-ui/core';
 
+
+
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../store/actions/user_actions";
+
 const Auth = (props) =>{
 
     const [register, setRegister] = useState(false);
+
+    //this is used to listen to store data
+    const notifications = useSelector(state => state.notifications)
+
+    //this is used to dispatch an action to redux store
+    const dispatch = useDispatch();
 
 
     const formik = useFormik({
@@ -20,7 +31,7 @@ const Auth = (props) =>{
 
         }),
         onSubmit:(values, {resetForm})=>{
-            console.log(values)
+            handleSubmit(values);
         }
     })
 
@@ -28,6 +39,22 @@ const Auth = (props) =>{
         error: formik.errors[value] && formik.touched[value] ? true:false,
         helperText:formik.errors[value] && formik.touched[value] ? formik.errors[value] : null
     })
+
+    useEffect(()=>{
+        if(notifications && notifications.success){
+            props.history.push('/dashboard')
+        }
+    },[notifications, props.history])
+
+
+
+    const handleSubmit = (values) => {        
+         if(register){
+            dispatch(registerUser(values));
+         }else{
+            
+         }
+    }
 
 
     return(
@@ -71,7 +98,7 @@ const Auth = (props) =>{
 
                     <Divider/>
 
-                    <Button className="mt-3" variant="outlined" color="secondary" type="submit" size="small" onClick={()=>setRegister(!register)} >
+                    <Button className="mt-3" variant="outlined" color="secondary"  size="small" onClick={()=>setRegister(!register)} >
                         Want to {!register ? 'Register':'Login'} ?
                     </Button>
 
