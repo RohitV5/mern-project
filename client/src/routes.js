@@ -8,6 +8,7 @@ import Auth from './components/auth';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { isAuthUser } from './store/actions/user_actions';
+import Loader from './utils/loader';
 
 const Routes = () => {
     const [loading, setLoading] = useState(true)
@@ -32,9 +33,9 @@ const Routes = () => {
         <BrowserRouter>
             <Header/>
             {/* MainLayout is a hoc component, that is it will render things iside it as they are */}
-            {loading ? <>
-            LOADING
-            </>:
+            {loading ? 
+            <Loader></Loader>
+            :
             <MainLayout> 
                 <Switch>
                     <Route path="/auth" component={Auth}/>
