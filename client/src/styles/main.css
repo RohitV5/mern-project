@@ -7,7 +7,7 @@ a, a:hover {
 }
 
 .navbar {
-  border-bottom: 5px solid #dbdbdb;
+  border-bottom: 2px solid #dbdbdb;
   background: white;
 }
 .navbar.dash_layout {
