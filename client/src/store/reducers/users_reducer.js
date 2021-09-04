@@ -9,7 +9,7 @@ let DEFAULT_USER_STATE = {
         age:null,
         role:null
     },
-    auth:false
+    auth:null
 }
 
 export default function usersReducer(state=DEFAULT_USER_STATE, action){

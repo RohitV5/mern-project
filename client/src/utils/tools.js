@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import cookie from 'react-cookies';
 
 export const showToast = (type,msg) => {
 
@@ -17,5 +18,16 @@ export const showToast = (type,msg) => {
             return false;
 
     }
+
+}
+
+
+//get cookie if exist
+export const getTokenCookie = () => cookie.load('x-access-token');
+
+export const removeTokenCookie = () => cookie.remove('x-access-token');
+
+//set cookie on axios request
+export const getAuthHeader =  { headers: {'x-access-token': getTokenCookie()}
 
 }
