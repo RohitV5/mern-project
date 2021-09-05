@@ -1,5 +1,5 @@
 import React, {useReducer, useEffect} from 'react';
-import {Grid} from '@material-ui/core';
+import {Grid, Button} from '@material-ui/core';
 import ArticleCard from '../../utils/articleCard'
 import { useDispatch, useSelector } from 'react-redux';
 import { getArticles } from '../../store/actions/article_actions';
@@ -33,7 +33,7 @@ const Home = () => {
     return (
         <div>
             <div>
-                CAROUSEL
+                CAROUSEL 
             </div>
             <Grid container spacing={2} className="article_card">
                 {/* {articles} */}
@@ -46,15 +46,17 @@ const Home = () => {
                     )        
                 :null}
             </Grid>
-            <button
-                    onClick={()=>{
-                      let skip = sort.skip + sort.limit;
-                      dispatch(getArticles({...sort, skip:skip}));
-                      setSort({skip:skip})  
-                    }}
-            >
-                Load more
-            </button>
+            
+            {articles && articles.articles ? 
+                <Button className="mt-3" variant="contained" color="secondary"  size="small" onClick={()=>{
+                              let skip = sort.skip + sort.limit;
+                              dispatch(getArticles({...sort, skip:skip}));
+                              setSort({skip:skip})  
+                            }}>
+                    Load More
+                </Button>
+            :null
+            }
         </div>
     )
 }

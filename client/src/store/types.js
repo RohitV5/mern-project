@@ -10,3 +10,8 @@ export const CLEAR_NOTIFICATION = "clear_notification";
 
 //// users
 export const AUTH_USER = "auth_user";
+export const SIGN_OUT = "sign_out";
+
+
+// site
+export const SITE_LAYOUT = "site_layout"

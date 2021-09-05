@@ -9,7 +9,8 @@ import HomeIcon from '@material-ui/icons/Home'
 import VpnKeyIcon from '@material-ui/icons/VpnKey'
 import DashboardIcon from  '@material-ui/icons/Dashboard'
 
-const SideDrawer = () =>{
+//passing a function in prop from parent for execution
+const SideDrawer = ({functionForSignOut}) =>{
 
     const [state, setState] = useState(false);
 
@@ -33,11 +34,16 @@ const SideDrawer = () =>{
                         <ListItemIcon><MailIcon/></ListItemIcon>
                         <ListItemText primary="Contact"></ListItemText>
                     </ListItem>
-                    <ListItem button component={RouterLink} to="/auth" onClick={()=>setState(false)}>
+                    <ListItem button  to="/auth" onClick={()=>setState(false)}>
                         <ListItemIcon><VpnKeyIcon/></ListItemIcon>
                         <ListItemText primary="Sign In"></ListItemText>
                     </ListItem>
-                    <ListItem button component={RouterLink} to="/auth" onClick={()=>setState(false)}>
+                    <ListItem button component={RouterLink} to="/auth" 
+                        onClick={()=>{
+                            functionForSignOut();
+                            setState(false)
+                            }
+                        }>
                         <ListItemIcon><VpnKeyIcon/></ListItemIcon>
                         <ListItemText primary="Sign out"></ListItemText>
                     </ListItem>

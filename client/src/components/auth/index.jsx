@@ -7,7 +7,7 @@ import {TextField, Button, Divider} from '@material-ui/core';
 
 
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../store/actions/user_actions";
+import { registerUser, signInUser } from "../../store/actions/user_actions";
 
 const Auth = (props) =>{
 
@@ -52,7 +52,7 @@ const Auth = (props) =>{
          if(register){
             dispatch(registerUser(values));
          }else{
-            
+            dispatch(signInUser(values))
          }
     }
 

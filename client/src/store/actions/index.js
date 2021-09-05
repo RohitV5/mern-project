@@ -1,4 +1,4 @@
-import { GET_ARTICLES, ERROR_GLOBAL, SUCCESS_GLOBAL, CLEAR_NOTIFICATION, AUTH_USER } from "../types"
+import { GET_ARTICLES, ERROR_GLOBAL, SUCCESS_GLOBAL, CLEAR_NOTIFICATION, AUTH_USER , SIGN_OUT, SITE_LAYOUT} from "../types"
 
 //this file contains list of all action that are triggered by components
 //the logic for handling these actions are stored in reducer files
@@ -45,6 +45,19 @@ export const clearNotification = () => {
 export const authUser = (user) => ({
     type: AUTH_USER,
     payload:user
+});
+
+
+export const signOut = () => ({
+    type: SIGN_OUT
+});
+
+
+////////////////// users ///////////////////////
+
+export const appLayout = (layout) => ({
+    type: SITE_LAYOUT,
+    payload:layout
 });
 
 

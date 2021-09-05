@@ -1,23 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import GoogleFontLoader from 'react-google-font-loader';
 import Home from './components/home';
 import Header from './components/navigation/header';
 import MainLayout from './components/hoc/mainLayout';
 import Auth from './components/auth';
+import Dashboard from './components/dashboard';
+import { useDispatch, useSelector } from 'react-redux';
+import { isAuthUser } from './store/actions/user_actions';
+import Loader from './utils/loader';
 
 const Routes = () => {
+    const [loading, setLoading] = useState(true)
+
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch(isAuthUser())
+    },[dispatch])
+
+
+    const users = useSelector(state => state.users);
+
+    useEffect(()=>{
+        if(users.auth !== null){
+            setLoading(false)
+        }
+    },[users])
+
 
     return (
         <BrowserRouter>
             <Header/>
             {/* MainLayout is a hoc component, that is it will render things iside it as they are */}
+            {loading ? 
+            <Loader></Loader>
+            :
             <MainLayout> 
                 <Switch>
+                    <Route path="/dashboard" component={Dashboard} />
                     <Route path="/auth" component={Auth}/>
                     <Route path="/" component={Home}/>
                 </Switch>
             </MainLayout>
+            }
+
             <GoogleFontLoader
                 fonts={[
                     {
