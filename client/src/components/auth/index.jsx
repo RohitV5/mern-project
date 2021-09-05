@@ -83,6 +83,7 @@ const Auth = (props) =>{
                             label="Enter your password" 
                             variant="outlined" 
                             type="password"
+                            autocomplete="on"
                             {...formik.getFieldProps('password')}
                             {...errorHelper(formik, 'password')}
                             

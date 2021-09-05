@@ -34,7 +34,7 @@ const SideDrawer = ({functionForSignOut}) =>{
                         <ListItemIcon><MailIcon/></ListItemIcon>
                         <ListItemText primary="Contact"></ListItemText>
                     </ListItem>
-                    <ListItem button  to="/auth" onClick={()=>setState(false)}>
+                    <ListItem button component={RouterLink} to="/auth" onClick={()=>setState(false)}>
                         <ListItemIcon><VpnKeyIcon/></ListItemIcon>
                         <ListItemText primary="Sign In"></ListItemText>
                     </ListItem>

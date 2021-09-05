@@ -13,8 +13,11 @@ const AdminLayout = (props) =>{
                          <ListItem button component={RouterLink} to="/dashboard">
                              <ListItemText primary="Dashboard"/>
                          </ListItem>
-                         <ListItem button component={RouterLink} to="/profile">
+                         <ListItem button component={RouterLink} to="/dashboard/profile">
                              <ListItemText primary="Profile"/>
+                         </ListItem>
+                         <ListItem button component={RouterLink} to="/dashboard/articles">
+                             <ListItemText primary="Articles"/>
                          </ListItem>
                      </List>
                  </div>
