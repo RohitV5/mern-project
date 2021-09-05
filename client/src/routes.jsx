@@ -5,7 +5,7 @@ import Home from './components/home';
 import Header from './components/navigation/header';
 import MainLayout from './components/hoc/mainLayout';
 import Auth from './components/auth';
-
+import Dashboard from './components/dashboard';
 import { useDispatch, useSelector } from 'react-redux';
 import { isAuthUser } from './store/actions/user_actions';
 import Loader from './utils/loader';
@@ -38,6 +38,7 @@ const Routes = () => {
             :
             <MainLayout> 
                 <Switch>
+                    <Route path="/dashboard" component={Dashboard} />
                     <Route path="/auth" component={Auth}/>
                     <Route path="/" component={Home}/>
                 </Switch>
