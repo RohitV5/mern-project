@@ -1,5 +1,6 @@
 //// articles
 export const GET_ARTICLES = "get_articles";
+export const GET_ARTICLE = "get_article";
 
 
 //// notifications

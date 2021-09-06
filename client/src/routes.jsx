@@ -12,6 +12,7 @@ import Loader from './utils/loader';
 import Profile from './components/dashboard/profiles';
 import Articles from './components/dashboard/articles';
 import authGaurd from './components/hoc/authGaurd';
+import Article from './components/articles';
 
 const Routes = () => {
     const [loading, setLoading] = useState(true)
@@ -44,6 +45,7 @@ const Routes = () => {
                     <Route path="/dashboard/articles" component={authGaurd(Articles,true)} />
                     <Route path="/dashboard/profile" component={authGaurd(Profile)} />
                     <Route path="/dashboard" component={authGaurd(Dashboard)} />
+                    <Route path="/article/:id" component={Article} />
                     <Route path="/auth" component={Auth}/>
                     <Route path="/" component={Home}/>
                 </Switch>

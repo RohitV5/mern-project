@@ -38,6 +38,20 @@ export const getArticles = (sort) => {
 }
 
 
+export const getArticle = (id) =>{
+    return async (dispatch) =>{
+
+        try{
+            const request = await axios.get(`/api/articles/get_byid/${id}`);
+            dispatch(index_actions.getArticle(request.data[0]))
+        }catch(error){
+            dispatch(index_actions.errorGlobal(error.response.data.message))
+        }
+
+    }
+}
+
+
 // redux flow
 
 // dipatch to getarticle ==> action will get article from server then ==> dispatch to  reducer ==> reducer will take the response from action and update the store
