@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 
 import {TextField, Button, Divider} from '@material-ui/core';
 
-
+import { PreventAuthRoute } from "../hoc/preventAuthRoute";
 
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, signInUser } from "../../store/actions/user_actions";
@@ -58,7 +58,7 @@ const Auth = (props) =>{
 
 
     return(
-        <>
+        <PreventAuthRoute>
             <div className="auth_container">
                 <h1>Authenticate</h1>
                 <form className="mt-3" onSubmit={formik.handleSubmit}>
@@ -83,6 +83,7 @@ const Auth = (props) =>{
                             label="Enter your password" 
                             variant="outlined" 
                             type="password"
+                            autocomplete="on"
                             {...formik.getFieldProps('password')}
                             {...errorHelper(formik, 'password')}
                             
@@ -106,7 +107,7 @@ const Auth = (props) =>{
                 </form>
 
             </div>
-        </>
+        </PreventAuthRoute>
     )
 }
 

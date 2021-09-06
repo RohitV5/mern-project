@@ -25,9 +25,10 @@ export const showToast = (type,msg) => {
 //get cookie if exist
 export const getTokenCookie = () => cookie.load('x-access-token');
 
-export const removeTokenCookie = () => cookie.remove('x-access-token');
+export const removeTokenCookie = () => cookie.remove('x-access-token', {path:"/"});
 
 //set cookie on axios request
-export const getAuthHeader =  { headers: {'x-access-token': getTokenCookie()}
+export const getAuthHeader = () =>{
+    return { headers: {'x-access-token': getTokenCookie()}} 
 
 }

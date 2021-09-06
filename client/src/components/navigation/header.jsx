@@ -15,6 +15,8 @@ const Header = (prop) =>{
     const notifications = useSelector(state => state.notifications);
     const dispatch = useDispatch();
 
+    const users = useSelector(state=>state.users);
+
     //function to be called from children
     const signOutUser = () =>{
         dispatch(signOut());
@@ -62,7 +64,7 @@ const Header = (prop) =>{
                 <Link style={{fontFamily:"Fredoka One"}} to="/" className="navbar-brand d-flex align-items-center" >
                     FlickBase
                 </Link>
-                <SideDrawer functionForSignOut={signOutUser}/>
+                <SideDrawer users={users} functionForSignOut={signOutUser}/>
             </nav>
             
 
