@@ -1,4 +1,4 @@
-import { GET_ARTICLES,GET_ARTICLE, ERROR_GLOBAL, SUCCESS_GLOBAL, CLEAR_NOTIFICATION, AUTH_USER , SIGN_OUT, SITE_LAYOUT} from "../types"
+import { GET_ARTICLES,GET_ARTICLE, ERROR_GLOBAL, SUCCESS_GLOBAL, CLEAR_NOTIFICATION, AUTH_USER , SIGN_OUT, SITE_LAYOUT, CLEAR_CURR_ARTICLE} from "../types"
 
 //this file contains list of all action that are triggered by components
 //the logic for handling these actions are stored in reducer files
@@ -16,6 +16,11 @@ export const getArticles = (articles) =>({
 export const getArticle = (article) =>({
     type: GET_ARTICLE,
     payload: article
+})
+
+
+export const clearCurrentArticle = () =>({
+    type: CLEAR_CURR_ARTICLE
 })
 
 
