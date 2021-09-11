@@ -22,6 +22,7 @@ import WYSIWYG from '../../../utils/forms/wysiwyg';
 const AddArticle = () => {
 
     const actorsValue = useRef('');
+    const [editorBlur, setEditorBlur] = useState(false);
 
     const formik = useFormik({
         enableReinitialize:true,
@@ -34,7 +35,11 @@ const AddArticle = () => {
 
     
     const handleEditorState = (state) =>{
-        console.log(state)
+        formik.setFieldValue('content', state, true)
+    }
+
+    const handleEditorBlur = (blur) =>{
+        setEditorBlur(true);
     }
 
     return(
@@ -53,7 +58,25 @@ const AddArticle = () => {
                 </div>
 
                 <div className="form-group">
-                    <WYSIWYG setEditorState={(state)=>{handleEditorState(state)}}></WYSIWYG>
+                    <WYSIWYG 
+                        setEditorState={(state)=>{handleEditorState(state)}}
+                        setEditorBlur={(blur)=>{handleEditorBlur(blur)}}
+                    >
+
+
+                    </WYSIWYG>
+
+                    {formik.errors.content && editorBlur ? 
+                        <FormHelperText error={true}>
+                            {formik.errors.content}
+                        </FormHelperText>
+                        :null
+                    }
+
+                    <TextField type="hidden" name="content" {...formik.getFieldProps('content')}>
+
+                    </TextField>
+                  
 
                 </div>
 
