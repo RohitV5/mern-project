@@ -17,6 +17,7 @@ import {
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { errorHelper } from '../../../utils/tools';
+import WYSIWYG from '../../../utils/forms/wysiwyg';
 
 const AddArticle = () => {
 
@@ -32,7 +33,9 @@ const AddArticle = () => {
     })
 
     
-
+    const handleEditorState = (state) =>{
+        console.log(state)
+    }
 
     return(
         <AdminLayout section="Add Article">
@@ -46,6 +49,11 @@ const AddArticle = () => {
                         {...formik.getFieldProps('title')}  
                         {...errorHelper(formik,'title')}
                     />
+
+                </div>
+
+                <div className="form-group">
+                    <WYSIWYG setEditorState={(state)=>{handleEditorState(state)}}></WYSIWYG>
 
                 </div>
 
