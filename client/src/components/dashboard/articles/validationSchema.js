@@ -6,7 +6,7 @@ export const formValues = {
     excerpt:'',
     score:'',
     director:'',
-    actors:'',
+    actors:[],
     status:'draft'
 }
 

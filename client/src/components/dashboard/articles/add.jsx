@@ -1,4 +1,4 @@
-import { useFormik } from 'formik';
+import { FieldArray, FormikProvider, useFormik } from 'formik';
 import React, {useState, useEffect, useRef} from 'react';
 import AdminLayout from '../../hoc/adminLayout';
 import { validation, formValues } from './validationSchema';
@@ -19,6 +19,8 @@ import AddIcon from '@material-ui/icons/Add';
 import { errorHelper } from '../../../utils/tools';
 
 const AddArticle = () => {
+
+    const actorsValue = useRef('');
 
     const formik = useFormik({
         enableReinitialize:true,
@@ -83,6 +85,50 @@ const AddArticle = () => {
                     />
 
                 </div>
+
+                <FormikProvider value={formik}>
+                    <h5>Add the actors:</h5>
+                    <FieldArray name="actors" render={arrayHelpers => (
+                        <div>
+                            <Paper className="actors_form">
+                                <InputBase inputRef={actorsValue} className="input" placeholder="Add actor name here"  />
+                                <IconButton onClick={()=>{
+                                    arrayHelpers.push(actorsValue.current.value );
+                                    actorsValue.current.value = '';
+                                }}>
+                                    <AddIcon></AddIcon>
+                                </IconButton>
+                            </Paper>
+
+                            {formik.errors.actors && formik.touched.actors ? 
+                                <FormHelperText error={true}>
+                                    {formik.errors.actors}
+                                </FormHelperText>
+                                    :null
+
+                            }
+
+                            <div className="chip_container">
+                                { formik.values.actors.map((actor,index)=>(                                    
+                                    <div key={index}>
+                                        <Chip
+                                            label={`${actor}`}
+                                            color="primary" 
+                                            onDelete={()=>{
+                                                arrayHelpers.remove(index)
+                                            }}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+
+                        </div>
+
+                    )}>
+
+                    </FieldArray>
+                     
+                </FormikProvider>
 
                 <FormControl variant="outlined">
                     <h5>Select status</h5>

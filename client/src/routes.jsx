@@ -44,7 +44,7 @@ const Routes = () => {
             <MainLayout> 
                 <Switch>
                     {/* ordering of routes matter  */}
-                    <Route path="/dashboard/article/add" component={authGaurd(AddArticle)} />
+                    <Route path="/dashboard/articles/add" component={authGaurd(AddArticle)} />
                     <Route path="/dashboard/articles" component={authGaurd(Articles,true)} />
                     <Route path="/dashboard/profile" component={authGaurd(Profile)} />
                     <Route path="/dashboard" component={authGaurd(Dashboard)} />
