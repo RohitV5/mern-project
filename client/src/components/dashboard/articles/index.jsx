@@ -7,10 +7,15 @@ import { LinkContainer } from "react-router-bootstrap";
 
 import { getPaginateArticles } from "../../../store/actions/article_actions";
 
+import PaginationComponent from "./paginate";
+
 const Articles = () =>{
 
 
     const dispatch = useDispatch();
+
+    const articles = useSelector(state=>{return state.articles});
+    let arts = articles.adminArticles;
 
     useEffect(()=>{
 
@@ -50,6 +55,10 @@ const Articles = () =>{
                     </form>
 
                 </ButtonToolbar>
+
+                <PaginationComponent arts={arts}>
+                    
+                </PaginationComponent>
 
             </div>
         </AdminLayout>
