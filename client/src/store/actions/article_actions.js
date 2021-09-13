@@ -1,5 +1,6 @@
 import * as index_actions from './index';
 import axios from 'axios';
+import { getAuthHeader } from '../../utils/tools';
 
 // axios.defaults.headers.post['Content-type'] = 'application/json'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
@@ -46,6 +47,24 @@ export const getArticle = (id) =>{
             dispatch(index_actions.getArticle(request.data[0]))
         }catch(error){
             dispatch(index_actions.errorGlobal(error.response.data.message))
+        }
+
+    }
+}
+
+
+
+export const addArticle = (article) =>{
+    return async (dispatch) =>{
+
+        try{
+            const request = await axios.post(`/api/articles/admin/add_articles`,
+                article, getAuthHeader());
+
+            dispatch(index_actions.addArticles(request.data));
+            dispatch(index_actions.successGlobal("Article added!!"))
+        }catch(error){
+            dispatch(index_actions.errorGlobal(error.response.data.message));
         }
 
     }

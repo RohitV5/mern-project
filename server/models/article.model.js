@@ -32,7 +32,7 @@ const articleSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    actor:{
+    actors:{
         type:[String],
         required:true,
         validate:{
