@@ -1,4 +1,4 @@
-import { GET_ARTICLES, GET_ARTICLE, CLEAR_CURR_ARTICLE, ADD_ARTICLE} from "../types"
+import { GET_ARTICLES, GET_ARTICLE, CLEAR_CURR_ARTICLE, ADD_ARTICLE, GET_ADMIN_ARTICLES} from "../types"
 
 export default function articleReducer(state={}, action){
     switch(action.type){
@@ -10,6 +10,8 @@ export default function articleReducer(state={}, action){
             return {...state, current:''}
         case ADD_ARTICLE:
             return {...state, lastAdded: action.payload, success:true}
+        case GET_ADMIN_ARTICLES:
+            return {...state, adminArticles: action.payload}
         default:
             return state
     }

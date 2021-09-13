@@ -70,6 +70,18 @@ export const addArticle = (article) =>{
     }
 }
 
+export const getPaginateArticles= (page=1, limit=5) =>{
+    return async(dispatch) => {
+        try{
+            const request = await axios.post(`/api/articles/admin/paginate`, {page,limit},getAuthHeader())
+
+            dispatch(index_actions.getPaginateArticles(request.data))
+        }catch(error){
+            dispatch(index_actions.errorGlobal(error.response.data.message))
+        }
+    }
+}
+
 
 // redux flow
 
