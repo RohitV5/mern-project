@@ -23,6 +23,13 @@ const Articles = () =>{
 
     },[dispatch])
 
+    const goToPrevPage = (page) =>{
+        dispatch(getPaginateArticles(page))
+    }
+
+    const goToNextPage = (page) =>{
+        dispatch(getPaginateArticles(page))
+    }
 
 
 
@@ -56,7 +63,11 @@ const Articles = () =>{
 
                 </ButtonToolbar>
 
-                <PaginationComponent arts={arts}>
+                <PaginationComponent 
+                    arts={arts} 
+                    prev={(page) => goToPrevPage(page)} 
+                    next={(page) => goToNextPage(page)}
+                >
                     
                 </PaginationComponent>
 

@@ -3,7 +3,16 @@ import {Table, Pagination} from  'react-bootstrap';
 import Moment from "react-moment";
 import Loader from "../../../utils/loader";
 
-const PaginationComponent = ({arts}) => {
+const PaginationComponent = ({arts, prev , next}) => {
+
+    const goToPrevPage = (page) =>{
+        prev(page);
+    }
+
+    const goToNextPage = (page) =>{
+        next(page);
+    }
+
      return (
         <>
             {
@@ -31,10 +40,10 @@ const PaginationComponent = ({arts}) => {
                         {arts.hasPrevPage ? 
                         
                             <>
-                                <Pagination.Prev onClick={()=>{}}>
+                                <Pagination.Prev onClick={()=>{goToPrevPage(arts.prevPage)}}>
 
                                 </Pagination.Prev> 
-                                <Pagination.Item onClick={()=>{}}>
+                                <Pagination.Item onClick={()=>{goToPrevPage(arts.prevPage)}}>
                                     {arts.prevPage}
                                 </Pagination.Item>
                             </>
@@ -50,10 +59,10 @@ const PaginationComponent = ({arts}) => {
                         
                             <>
 
-                                <Pagination.Item onClick={()=>{}}>
+                                <Pagination.Item onClick={()=>{goToNextPage(arts.nextPage)}}>
                                     {arts.nextPage}
                                 </Pagination.Item>
-                                <Pagination.Next onClick={()=>{}}>
+                                <Pagination.Next onClick={()=>{goToNextPage(arts.nextPage)}}>
 
                                 </Pagination.Next> 
                             </>
