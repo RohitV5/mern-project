@@ -86,8 +86,8 @@ router.route("/admin/paginate")
 
         //aggregate uses pipelines
         const aggQuery = Article.aggregate([
-            {$match :  {"status":"public"}}
-        ])
+          // {$match :  {"status":"public"}}
+        ]);
         
 
         const options = {
