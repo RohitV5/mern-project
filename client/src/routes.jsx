@@ -13,6 +13,7 @@ import Profile from './components/dashboard/profiles';
 import Articles from './components/dashboard/articles';
 import authGaurd from './components/hoc/authGaurd';
 import Article from './components/articles';
+import AddArticle from './components/dashboard/articles/add';
 
 const Routes = () => {
     const [loading, setLoading] = useState(true)
@@ -42,9 +43,12 @@ const Routes = () => {
             :
             <MainLayout> 
                 <Switch>
+                    {/* ordering of routes matter  */}
+                    <Route path="/dashboard/articles/add" component={authGaurd(AddArticle)} />
                     <Route path="/dashboard/articles" component={authGaurd(Articles,true)} />
                     <Route path="/dashboard/profile" component={authGaurd(Profile)} />
                     <Route path="/dashboard" component={authGaurd(Dashboard)} />
+                    
                     <Route path="/article/:id" component={Article} />
                     <Route path="/auth" component={Auth}/>
                     <Route path="/" component={Home}/>

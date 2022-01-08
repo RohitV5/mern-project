@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { clearCurrentArticle } from '../../store/actions';
 import { getArticle } from '../../store/actions/article_actions';
 import Loader from '../../utils/loader';
 import ScoreCard from '../../utils/scoreCard';
@@ -14,6 +15,13 @@ const Article = (props) => {
     useEffect(()=>{
         dispatch(getArticle(props.match.params.id))
     },[dispatch, props.match.params])
+
+    // will run as unmounting the component ie. destroy
+    useEffect(()=>{
+        return ()=>{
+            dispatch(clearCurrentArticle())
+        }
+    },[])
 
     return(
         <>

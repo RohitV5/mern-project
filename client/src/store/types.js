@@ -1,6 +1,10 @@
 //// articles
 export const GET_ARTICLES = "get_articles";
 export const GET_ARTICLE = "get_article";
+export const ADD_ARTICLE = "add_article";
+export const CLEAR_CURR_ARTICLE = "clear_current_article";
+export const GET_ADMIN_ARTICLES = "get_admin_articles";
+export const UPDATE_ARTICLE_STATUS = "update_article_status";
 
 
 //// notifications
