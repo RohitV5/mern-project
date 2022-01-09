@@ -1,8 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AdminLayout from "../../hoc/adminLayout";
 import { useDispatch, useSelector } from "react-redux";
-import { changeArticleStatus } from "../../../store/actions/article_actions";
 import {
+  changeArticleStatus,
+  deleteArticle,
+  getPaginateArticles,
+} from "../../../store/actions/article_actions";
+import {
+  Modal,
   Button,
   ButtonToolbar,
   ButtonGroup,
@@ -10,13 +15,20 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-
-import { getPaginateArticles } from "../../../store/actions/article_actions";
-
 import PaginationComponent from "./paginate";
 
 const Articles = (prop) => {
   const dispatch = useDispatch();
+
+  const [removeAlert, setRemoveAlert] = useState(false);
+  const [toRemove, setToRemove] = useState();
+
+  const handleClose = () => setRemoveAlert(false);
+  const handleShow = (id = null) => {
+    console.log(id);
+    setToRemove(id);
+    setRemoveAlert(true);
+  };
 
   const editArtsAction = (id) => {
     prop.history.push(`/dashboard/articles/${id}`);
@@ -25,6 +37,11 @@ const Articles = (prop) => {
   const articles = useSelector((state) => {
     return state.articles;
   });
+
+  const notifications = useSelector((state) => {
+    return state.notifications;
+  });
+
   let arts = articles.adminArticles;
 
   useEffect(() => {
@@ -43,6 +60,19 @@ const Articles = (prop) => {
     let newStatus = status === "draft" ? "public" : "draft";
     dispatch(changeArticleStatus(newStatus, _id));
   };
+
+  const handleDelete = (id) => {
+    console.log(id);
+    dispatch(deleteArticle(id));
+  };
+
+  useEffect(() => {
+    handleClose();
+    if (notifications && notifications.deleteArticle) {
+      console.log("fetching arts");
+      dispatch(getPaginateArticles(arts.page));
+    }
+  }, [dispatch, notifications, arts]);
 
   return (
     <AdminLayout section="Articles">
@@ -73,7 +103,23 @@ const Articles = (prop) => {
           next={(page) => goToNextPage(page)}
           handleStatusChange={(status, id) => handleStatusChange(status, id)}
           editArtsAction={(id) => editArtsAction(id)}
+          handleShow={(id) => handleShow(id)}
         ></PaginationComponent>
+
+        <Modal show={removeAlert} onHide={() => handleClose()}>
+          <Modal.Header>
+            <Modal.Title>Are you sure?</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Confirm Delete</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => handleClose()}>
+              Close
+            </Button>
+            <Button variant="danger" onClick={() => handleDelete(toRemove)}>
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </AdminLayout>
   );

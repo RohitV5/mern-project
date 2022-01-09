@@ -9,6 +9,7 @@ const PaginationComponent = ({
   next,
   handleStatusChange,
   editArtsAction,
+  handleShow,
 }) => {
   const goToPrevPage = (page) => {
     prev(page);
@@ -40,7 +41,7 @@ const PaginationComponent = ({
                   <td>{item.score}</td>
                   <td
                     className="action_btn remove_btn"
-                    onClick={() => alert(item._id)}
+                    onClick={() => handleShow(item._id)}
                   >
                     Remove
                   </td>
