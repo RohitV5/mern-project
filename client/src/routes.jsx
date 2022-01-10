@@ -14,62 +14,70 @@ import Articles from './components/dashboard/articles';
 import authGaurd from './components/hoc/authGaurd';
 import Article from './components/articles';
 import AddArticle from './components/dashboard/articles/add';
+import { EditArticle } from "./components/dashboard/articles/edit";
 
 const Routes = () => {
-    const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(()=>{
-        dispatch(isAuthUser())
-    },[dispatch])
+  useEffect(() => {
+    dispatch(isAuthUser());
+  }, [dispatch]);
 
+  const users = useSelector((state) => state.users);
 
-    const users = useSelector(state => state.users);
+  useEffect(() => {
+    if (users.auth !== null) {
+      setLoading(false);
+    }
+  }, [users]);
 
-    useEffect(()=>{
-        if(users.auth !== null){
-            setLoading(false)
-        }
-    },[users])
-
-
-    return (
-        <BrowserRouter>
-            <Header/>
-            {/* MainLayout is a hoc component, that is it will render things iside it as they are */}
-            {loading ? 
-            <Loader></Loader>
-            :
-            <MainLayout> 
-                <Switch>
-                    {/* ordering of routes matter  */}
-                    <Route path="/dashboard/articles/add" component={authGaurd(AddArticle)} />
-                    <Route path="/dashboard/articles" component={authGaurd(Articles,true)} />
-                    <Route path="/dashboard/profile" component={authGaurd(Profile)} />
-                    <Route path="/dashboard" component={authGaurd(Dashboard)} />
-                    
-                    <Route path="/article/:id" component={Article} />
-                    <Route path="/auth" component={Auth}/>
-                    <Route path="/" component={Home}/>
-                </Switch>
-            </MainLayout>
-            }
-
-            <GoogleFontLoader
-                fonts={[
-                    {
-                    font: 'Roboto',
-                    weights: [300, 400,900],
-                    },
-                    {
-                    font: 'Fredoka One'
-                    },
-                ]}
+  return (
+    <BrowserRouter>
+      <Header />
+      {/* MainLayout is a hoc component, that is it will render things iside it as they are */}
+      {loading ? (
+        <Loader></Loader>
+      ) : (
+        <MainLayout>
+          <Switch>
+            {/* ordering of routes matter  */}
+            <Route
+              path="/dashboard/articles/edit/:id"
+              component={authGaurd(EditArticle)}
             />
-        </BrowserRouter>
-        
-    )
-}
+            <Route
+              path="/dashboard/articles/add"
+              component={authGaurd(AddArticle)}
+            />
+            <Route
+              path="/dashboard/articles"
+              component={authGaurd(Articles, true)}
+            />
+            <Route path="/dashboard/profile" component={authGaurd(Profile)} />
+            <Route path="/dashboard" component={authGaurd(Dashboard)} />
+
+            <Route path="/article/:id" component={Article} />
+            <Route path="/auth" component={Auth} />
+            <Route path="/" component={Home} />
+          </Switch>
+        </MainLayout>
+      )}
+
+      <GoogleFontLoader
+        fonts={[
+          {
+            font: "Roboto",
+            weights: [300, 400, 900],
+          },
+          {
+            font: "Fredoka One",
+          },
+        ]}
+      />
+    </BrowserRouter>
+  );
+};
 
 export default Routes;

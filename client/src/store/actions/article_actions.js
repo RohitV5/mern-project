@@ -117,6 +117,22 @@ export const deleteArticle = (_id) => {
 };
 
 
+export const getAdminArticle = (_id) => {
+  return async (dispatch) => {
+    try {
+      const request = await axios.get(
+        `/api/articles/admin/${_id}`,
+        getAuthHeader()
+      );
+      dispatch(index_actions.getArticle(request.data));
+      // dispatch(index_actions.successGlobal("Article deleted"));
+    } catch (e) {
+      dispatch(index_actions.errorGlobal(e.response.data.message));
+    }
+  };
+};
+
+
 // redux flow
 
 // dipatch to getarticle ==> action will get article from server then ==> dispatch to  reducer ==> reducer will take the response from action and update the store

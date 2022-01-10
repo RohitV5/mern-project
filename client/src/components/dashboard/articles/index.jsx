@@ -31,7 +31,7 @@ const Articles = (prop) => {
   };
 
   const editArtsAction = (id) => {
-    prop.history.push(`/dashboard/articles/${id}`);
+    prop.history.push(`/dashboard/articles/edit/${id}`);
   };
 
   const articles = useSelector((state) => {

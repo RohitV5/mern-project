@@ -12,6 +12,7 @@ import {
   GET_ADMIN_ARTICLES,
   UPDATE_ARTICLE_STATUS,
   DELETE_ARTICLE,
+  EDIT_ARTICLE,
 } from "../types";
 
 //this file contains list of all action that are triggered by components
@@ -50,6 +51,11 @@ export const updateArticleStatus = (articles) => ({
 
 export const deleteArticle = (id) => ({
   type: DELETE_ARTICLE,
+  payload: id,
+});
+
+export const editArticle = (id) => ({
+  type: EDIT_ARTICLE,
   payload: id,
 });
 

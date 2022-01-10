@@ -12,6 +12,7 @@ export const ERROR_GLOBAL = "error_global";
 export const SUCCESS_GLOBAL = "success_global";
 export const CLEAR_NOTIFICATION = "clear_notification";
 export const DELETE_ARTICLE = "delete_article";
+export const EDIT_ARTICLE = "edit_article";
 
 //// users
 export const AUTH_USER = "auth_user";
