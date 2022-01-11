@@ -133,6 +133,22 @@ export const getAdminArticle = (_id) => {
 };
 
 
+export const updateAdminArticle = (article,_id) => {
+  return async (dispatch) => {
+    try {
+      const newArticle = await axios.patch(
+        `/api/articles/admin/${_id}`,
+        article,
+        getAuthHeader()
+      );
+      dispatch(index_actions.getArticle(newArticle.data));
+      dispatch(index_actions.successGlobal("Article updated"));
+    } catch (e) {
+      dispatch(index_actions.errorGlobal(e.response.data.message));
+    }
+  };
+};
+
 // redux flow
 
 // dipatch to getarticle ==> action will get article from server then ==> dispatch to  reducer ==> reducer will take the response from action and update the store

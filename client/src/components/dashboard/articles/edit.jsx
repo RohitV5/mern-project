@@ -20,7 +20,8 @@ import { errorHelper } from "../../../utils/tools";
 import WYSIWYG from "../../../utils/forms/wysiwyg";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getAdminArticle } from "../../../store/actions/article_actions";
+import { getAdminArticle,updateAdminArticle } from "../../../store/actions/article_actions";
+import { clearCurrentArticle } from "../../../store/actions/index";
 import Loader from "../../../utils/loader";
 
 export const EditArticle = (props) => {
@@ -44,7 +45,7 @@ export const EditArticle = (props) => {
     validationSchema: validation,
     onSubmit: (values, { resetForm }) => {
       setIsSubmitting(true);
-      // dispatch(addArticle(values))
+      dispatch(updateAdminArticle(values,props.match.params.id))
     },
   });
 
@@ -57,18 +58,21 @@ export const EditArticle = (props) => {
   };
 
   useEffect(() => {
-    if (notifications && notifications.success) {
-      props.history.push("/dashboard/articles");
-    }
+    // if (notifications && notifications.success) {
+    //   props.history.push("/dashboard/articles");
+    // }
 
-    if (notifications && notifications.error) {
+    // if (notifications && notifications.error) {
       setIsSubmitting(false);
-    }
+    // }
   }, [notifications, props.history]);
 
   /// edit ///
   useEffect(() => {
     dispatch(getAdminArticle(props.match.params.id));
+    return (()=>{
+      dispatch(clearCurrentArticle())
+    })
   }, [dispatch, props.match.params]);
 
   useEffect(() => {

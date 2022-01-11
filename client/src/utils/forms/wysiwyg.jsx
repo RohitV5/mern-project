@@ -35,7 +35,6 @@ const WYSIWYG = (props) => {
         entityMap
       );
 
-      debugger;
 
       setEditorData({
         editorState: EditorState.createWithContent(contentState),
