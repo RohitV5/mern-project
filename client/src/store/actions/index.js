@@ -11,6 +11,8 @@ import {
   CLEAR_CURR_ARTICLE,
   GET_ADMIN_ARTICLES,
   UPDATE_ARTICLE_STATUS,
+  DELETE_ARTICLE,
+  EDIT_ARTICLE,
 } from "../types";
 
 //this file contains list of all action that are triggered by components
@@ -45,6 +47,16 @@ export const clearCurrentArticle = () => ({
 export const updateArticleStatus = (articles) => ({
   type: UPDATE_ARTICLE_STATUS,
   payload: articles,
+});
+
+export const deleteArticle = (id) => ({
+  type: DELETE_ARTICLE,
+  payload: id,
+});
+
+export const editArticle = (id) => ({
+  type: EDIT_ARTICLE,
+  payload: id,
 });
 
 ///////////////notifications//////////////////

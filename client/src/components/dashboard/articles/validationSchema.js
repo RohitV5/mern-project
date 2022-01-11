@@ -1,14 +1,14 @@
 import * as Yup from 'yup';
 
 export const formValues = {
-    title:'',
-    content:'',
-    excerpt:'',
-    score:'',
-    director:'',
-    actors:[],
-    status:'draft'
-}
+  title: "",
+  content: "",
+  excerpt: "",
+  score: 0,
+  director: "",
+  actors: [],
+  status: "draft",
+};
 
 export const validation = () =>
     Yup.object({

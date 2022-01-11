@@ -99,11 +99,55 @@ export const changeArticleStatus = (status, _id) => {
       dispatch(index_actions.updateArticleStatus(state));
       dispatch(index_actions.successGlobal("Article status updated"));
     } catch (e) {
-      dispatch(index_actions.successGlobal("Unable to update status"));
+      dispatch(index_actions.errorGlobal("Unable to update status"));
     }
   };
 };
 
+export const deleteArticle = (_id) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`/api/articles/admin/${_id}`, getAuthHeader());
+      dispatch(index_actions.deleteArticle());
+      dispatch(index_actions.successGlobal("Article deleted"));
+    } catch (e) {
+      dispatch(index_actions.errorGlobal(e.response.data.message));
+    }
+  };
+};
+
+
+export const getAdminArticle = (_id) => {
+  return async (dispatch) => {
+    try {
+      const request = await axios.get(
+        `/api/articles/admin/${_id}`,
+        getAuthHeader()
+      );
+      dispatch(index_actions.getArticle(request.data));
+      // dispatch(index_actions.successGlobal("Article deleted"));
+    } catch (e) {
+      dispatch(index_actions.errorGlobal(e.response.data.message));
+    }
+  };
+};
+
+
+export const updateAdminArticle = (article,_id) => {
+  return async (dispatch) => {
+    try {
+      const newArticle = await axios.patch(
+        `/api/articles/admin/${_id}`,
+        article,
+        getAuthHeader()
+      );
+      dispatch(index_actions.getArticle(newArticle.data));
+      dispatch(index_actions.successGlobal("Article updated"));
+    } catch (e) {
+      dispatch(index_actions.errorGlobal(e.response.data.message));
+    }
+  };
+};
 
 // redux flow
 
