@@ -38,7 +38,7 @@ const AuthProfile = () => {
         </Grid>
       </div>
       <Divider />
-      <Modal sie="lg" centered show={emailModal} onHide={closeModal}>
+      <Modal size="lg" centered show={emailModal} onHide={closeModal}>
         <Modal.Header>
           <Modal.Title>Update your email</Modal.Title>
         </Modal.Header>
