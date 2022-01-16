@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { TextField, Button, Stepper, Step, StepLabel } from "@material-ui/core";
 import { errorHelper } from "../../../../utils/tools";
+import { changeEmail } from "../../../../store/actions/user_actions";
 
 const EmailStepper = ({ user }) => {
   const [activeStep, setActiveStep] = useState(0);
@@ -28,7 +29,7 @@ const EmailStepper = ({ user }) => {
         }),
     }),
     onSubmit: (values, { resetForm }) => {
-      console.log(values);
+      dispatch(changeEmail(values));
     },
   });
 

@@ -17,6 +17,7 @@ export const EDIT_ARTICLE = "edit_article";
 //// users
 export const AUTH_USER = "auth_user";
 export const SIGN_OUT = "sign_out";
+export const CHANGE_USER_EMAIL = "change_user_email";
 
 
 // site

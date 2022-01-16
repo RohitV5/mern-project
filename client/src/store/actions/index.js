@@ -13,10 +13,11 @@ import {
   UPDATE_ARTICLE_STATUS,
   DELETE_ARTICLE,
   EDIT_ARTICLE,
+  CHANGE_USER_EMAIL,
 } from "../types";
 
 //this file contains list of all action that are triggered by components
-//the logic for handling these actions are stored in reducer files
+//the logic for handling these actions are stored in reducer files and these are dispatched from actions.
 
 ///////////////articles ////////////////////
 
@@ -93,9 +94,15 @@ export const signOut = () => ({
   type: SIGN_OUT,
 });
 
+export const changeUserEmail = (data) => ({
+  type: CHANGE_USER_EMAIL,
+  payload: data,
+});
+
 ////////////////// users ///////////////////////
 
 export const appLayout = (layout) => ({
   type: SITE_LAYOUT,
   payload: layout,
 });
+
