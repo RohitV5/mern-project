@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Divider, TextField } from "@material-ui/core";
 import Modal from "react-bootstrap/Modal";
 import { useSelector } from "react-redux";
@@ -16,6 +16,12 @@ const AuthProfile = () => {
   const openModal = () => {
     setEmailModal(true);
   };
+
+  useEffect(() => {
+    if (notifications && notifications.success) {
+      closeModal();
+    }
+  }, [notifications]);
 
   return (
     <div>
