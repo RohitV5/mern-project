@@ -14,6 +14,7 @@ import {
   DELETE_ARTICLE,
   EDIT_ARTICLE,
   CHANGE_USER_EMAIL,
+  UPDATE_USER_PROFILE,
 } from "../types";
 
 //this file contains list of all action that are triggered by components
@@ -99,10 +100,17 @@ export const changeUserEmail = (data) => ({
   payload: data,
 });
 
+export const updateUserProfile = (data) => ({
+  type: UPDATE_USER_PROFILE,
+  payload: data,
+});
+
 ////////////////// users ///////////////////////
 
 export const appLayout = (layout) => ({
   type: SITE_LAYOUT,
   payload: layout,
 });
+
+
 
