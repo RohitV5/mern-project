@@ -86,3 +86,24 @@ export const changeEmail = (data) => {
     }
   };
 };
+
+export const updateUserProfile = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      const profile = await axios.patch(
+        `/api/users/profile`,
+        data,
+        getAuthHeader()
+      );
+
+      const userData = { ...getState().users.data, ...profile.data };
+      //   dispatching to reducer
+      dispatch(index_actions.updateUserProfile(userData));
+      dispatch(
+        index_actions.successGlobal("User profile updated successfully")
+      );
+    } catch (e) {
+      dispatch(index_actions.errorGlobal(e.response.data.message));
+    }
+  };
+};
